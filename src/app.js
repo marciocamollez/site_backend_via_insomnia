@@ -5,6 +5,7 @@
 //Carregando os módulos - Jeito novo após instalar o sucrase
 import express from 'express';
 import routes from './routes';
+import './database';
 
 class App{
     constructor(){
