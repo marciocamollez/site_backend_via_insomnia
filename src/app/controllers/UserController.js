@@ -1,37 +1,34 @@
+import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
     async store(req, res) {
+
+        const schema = Yup.object().shape({
+            name: Yup.string()
+                .required(),
+            email: Yup.string()
+                .email()
+                .required(),
+            password: Yup.string()
+                .required()
+                .min(6)
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({
+                error: true,
+                code: 103,
+                message: "Error: Dados inválidos!"
+            });
+        }
+
         const emailExiste = await User.findOne({ email: req.body.email });
         if (emailExiste) {
             return res.status(400).json({
                 error: true,
                 code: 102,
                 message: "Error: Este e-mail já está cadastrado!"
-            });
-        }
-
-        if (!req.body.name || typeof req.body.name == undefined || req.body.name == null) {
-            return res.status(400).json({
-                error: true,
-                code: 103,
-                message: "Error: Necessário enviar o name com valor!"
-            });
-        }
-
-        if (!req.body.email || typeof req.body.email == undefined || req.body.email == null) {
-            return res.status(400).json({
-                error: true,
-                code: 104,
-                message: "Error: Necessário enviar o email com valor!"
-            });
-        }
-
-        if (!req.body.password || typeof req.body.password == undefined || req.body.password == null) {
-            return res.status(400).json({
-                error: true,
-                code: 105,
-                message: "Error: Necessário enviar o password com valor!"
             });
         }
 

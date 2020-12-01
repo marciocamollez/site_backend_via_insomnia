@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.10.18"
+    "mongoose": "^5.10.18",
+    "yup": "^0.31.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.6",
