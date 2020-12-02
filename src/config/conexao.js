@@ -5,7 +5,7 @@ class DataBase {
         this.mongoDataBase();
     }
     mongoDataBase() {
-        this.mongoDBConnection = mongoose.connect('mongodb://localhost/celke', {
+        this.mongoDBConnection = mongoose.connect('mongodb://localhost/db_site_react', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
