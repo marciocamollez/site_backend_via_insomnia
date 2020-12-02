@@ -5,15 +5,14 @@ class DataBase {
         this.mongoDataBase();
     }
     mongoDataBase() {
-        //Conexão com o Banco de Dados
-        mongoose.connect('mongodb://localhost/db_site_react', {
+        this.mongoDBConnection = mongoose.connect('mongodb://localhost/celke', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(() => {
-            console.log("Conexão realizada com sucesso!");
+            console.log("Conexão com MongoDB realizada com sucesso!")
         }).catch((erro) => {
-            console.log("Conexão falhou: " + erro);
-        });
+            console.log("Erro: Conexão com MongoDB não foi realizado com sucesso: " + erro)
+        })
     }
 }
 

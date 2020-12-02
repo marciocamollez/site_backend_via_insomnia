@@ -1,7 +1,5 @@
 import app from './app';
 
-//Iniciar Servidor
-const PORT = 8080
-app.listen(PORT, () => {
-    console.log("Servidor iniciado")
-})
+app.listen(8080, () => {
+    console.log("Servidor iniciado na porta 8080");
+});

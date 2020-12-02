@@ -2,9 +2,26 @@ import * as Yup from 'yup';
 import bcrypt from 'bcryptjs';
 import User from '../models/User';
 
-class UserController {
-    async store(req, res) {
+class UserController {  
+    
+    async index(req, res){
+        const { page = 1} = req.query;
+        const { limit = 40} = req.query;
+        await User.paginate({}, {select: '_id name email', page, limit}).then((users) => {
+            return res.json({
+                error: false,
+                users: users
+            });
+        }).catch((erro) => {
+            return res.status(400).json({
+                error: true,
+                code: 106,
+                message: "Erro: Não foi possível executar a solicitação!"
+            });
+        });
+    };
 
+    async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string()
                 .required(),
@@ -22,7 +39,7 @@ class UserController {
                 code: 103,
                 message: "Error: Dados inválidos!"
             });
-        }
+        };
 
         const emailExiste = await User.findOne({ email: req.body.email });
         if (emailExiste) {
@@ -31,7 +48,7 @@ class UserController {
                 code: 102,
                 message: "Error: Este e-mail já está cadastrado!"
             });
-        }
+        };
         
         var dados = req.body;
         dados.password = await bcrypt.hash(dados.password, 8);
@@ -52,30 +69,29 @@ class UserController {
     };
 
     async delete(req, res) {
-
         const usuarioExiste = await User.findOne({ _id: req.params.id});
 
         if(!usuarioExiste){
             return res.status(400).json({
                 error: true,
-                code: 121,
+                code: 104,
                 message: "Erro: Usuário não encontrado"
-            })
-        }
+            });
+        };
 
         const user = await User.deleteOne({_id: req.params.id}, (err) => {
             if(err) return res.status(400).json({
                 error: true,
-                code: 122,
+                code: 105,
                 message: "Error: Usuário não foi apagado com sucesso!"
-            })
+            });
         });
         
         return res.json({
             error: false,
             message: "Usuário apagado com sucesso!"
-        })
-    }
-}
+        });
+    };
+};
 
 export default new UserController();
