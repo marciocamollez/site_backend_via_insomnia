@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import UserController from './app/controllers/UserController';
 import LoginController from './app/controllers/LoginController';
 import PerfilController from './app/controllers/PerfilController';
+import HomeController from './app/controllers/HomeController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -19,5 +20,7 @@ routes.get('/perfil', authMiddleware, PerfilController.show);
 routes.put('/perfil', authMiddleware, PerfilController.update);
 
 routes.post('/login', LoginController.store);
+
+routes.get('/home', HomeController.show);
 
 export default routes;
