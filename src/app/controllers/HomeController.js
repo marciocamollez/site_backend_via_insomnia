@@ -1,4 +1,6 @@
+import * as Yup from 'yup';
 import Home from '../models/Home';
+
 
 class HomeController {
     async show(req, res) {
@@ -15,7 +17,7 @@ class HomeController {
                 message: "Erro: Não foi possível executar a solicitação!"
             });
         });
-    }
+    };
 
     async store(req, res) {
 
@@ -53,8 +55,8 @@ class HomeController {
                 error: true,
                 code: 122,
                 message: "Erro: A página home já possui um registro!"
-            })
-        }
+            });
+        };
 
         const home = await Home.create(dados, (err) => {
             if (err) return res.status(400).json({
@@ -66,10 +68,62 @@ class HomeController {
             return res.json({
                 error: false,
                 message: "Dados da página home cadastrado com sucesso!"
+            });
+        });
+    };
+
+    async update(req, res){
+
+        const schema = Yup.object().shape({
+            tituloTopo: Yup.string().required(), 
+            descTopo: Yup.string(),
+            tituloBtnTopo: Yup.string(),
+            linkBtnTopo: Yup.string(),
+            tituloServ: Yup.string(),
+            descServ: Yup.string(),
+            iconeUmServ: Yup.string(),
+            iconeDoisServ: Yup.string(),
+            iconeTresServ: Yup.string(),
+            tituloVideo: Yup.string(),
+            descTituloVideo: Yup.string(),
+            embedVideo: Yup.string(),
+            tituloProj: Yup.string(),
+            iconeUmProj: Yup.string(),
+            tituloUmProj: Yup.string(),
+            descUmProj: Yup.string(),
+            iconeDoisProj: Yup.string(),
+            tituloDoisProj: Yup.string(),
+            descDoisProj: Yup.string(),
+            iconeTresProj: Yup.string(),
+            tituloTresProj: Yup.string(),
+            descTresProj: Yup.string(),
+            iconeQuatroProj: Yup.string(),
+            tituloQuatroProj: Yup.string(),
+            descQuatroProj: Yup.string()
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({
+                error: true,
+                code: 124,
+                message: "Erro: Dados do formulário inválido!"
+            });
+        };
+
+        await Home.updateOne({}, req.body, (err) => {
+            if(err) return res.status(400).json({
+                error: true,
+                message: "Erro: Conteúdo da página home não foi editado com sucesso!"
             })
         });
 
-        /*
+        return res.json({
+            error: false,
+            message: "Conteúdo da página home editado com sucesso!"
+        });
+    };
+
+    /*
 {
 	"tituloTopo": "Temos a solução que a sua empresa precisa",
 	"descTopo": "This is a modified jumbotron that occupies the entire horizontal space of its parent.",
@@ -97,8 +151,7 @@ class HomeController {
 	"tituloQuatroProj": "Titulo 4",
 	"descQuatroProj":	"Praesent id ligula porta felis euismod semper commodo."
 }
-        */
-    }
-}
+    */
+};
 
 export default new HomeController();

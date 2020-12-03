@@ -22,6 +22,7 @@ routes.put('/perfil', authMiddleware, PerfilController.update);
 routes.post('/login', LoginController.store);
 
 routes.get('/home', HomeController.show);
-routes.post('/home', HomeController.store);
+routes.post('/home', authMiddleware, HomeController.store);
+routes.put('/home', authMiddleware, HomeController.update);
 
 export default routes;
