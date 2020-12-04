@@ -5,6 +5,7 @@ import UserController from './app/controllers/UserController';
 import LoginController from './app/controllers/LoginController';
 import PerfilController from './app/controllers/PerfilController';
 import HomeController from './app/controllers/HomeController';
+import RodapeControlle from './app/controllers/RodapeControlle';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -24,5 +25,9 @@ routes.post('/login', LoginController.store);
 routes.get('/home', HomeController.show);
 routes.post('/home', authMiddleware, HomeController.store);
 routes.put('/home', authMiddleware, HomeController.update);
+
+routes.get('/rodape', RodapeControlle.show);
+routes.post('/rodape', RodapeControlle.store);
+routes.put('/rodape', RodapeControlle.update);
 
 export default routes;

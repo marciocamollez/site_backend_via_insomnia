@@ -4,7 +4,7 @@ import User from '../models/User';
 
 class PerfilController{
     async show(req, res){
-        User.findOne({_id: req.userId }, '_id name email createdAt updatedAt').then((user) => {
+        User.findOne({_id: req.userId }, '_id namen email createdAt updatedAt').then((user) => {
             return res.json({
                 error: false,
                 user: user

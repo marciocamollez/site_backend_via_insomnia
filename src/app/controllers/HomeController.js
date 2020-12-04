@@ -75,7 +75,7 @@ class HomeController {
     async update(req, res){
 
         const schema = Yup.object().shape({
-            tituloTopo: Yup.string().required(), 
+            tituloTopo: Yup.string(), 
             descTopo: Yup.string(),
             tituloBtnTopo: Yup.string(),
             linkBtnTopo: Yup.string(),
@@ -114,7 +114,7 @@ class HomeController {
             if(err) return res.status(400).json({
                 error: true,
                 message: "Erro: Conteúdo da página home não foi editado com sucesso!"
-            })
+            });
         });
 
         return res.json({
@@ -123,35 +123,6 @@ class HomeController {
         });
     };
 
-    /*
-{
-	"tituloTopo": "Temos a solução que a sua empresa precisa",
-	"descTopo": "This is a modified jumbotron that occupies the entire horizontal space of its parent.",
-	"tituloBtnTopo":"ENTRE EM CONTATO",
-	"linkBtnTopo": "/contato",
-	"tituloServ":"First featurette heading.",
-	"descServ":"Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.",
-	"iconeUmServ": "coffee",
-	"iconeDoisServ": "lightbulb", 
-	"iconeTresServ":"warehouse",
-	"tituloVideo": "Vídeo",
-	"descTituloVideo": "Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna.",
-	"embedVideo": "<iframe className='embed-responsive-item' src='https://www.youtube.com/embed/bWEJu6W5Fn4?rel=0'></iframe>",
-	"tituloProj": "Projetos",
-	"iconeUmProj": "ad",
-	"tituloUmProj": "Titulo 1",
-	"descUmProj": "Praesent id ligula porta felis euismod semper commodo.",
-	"iconeDoisProj": "address-book",
-	"tituloDoisProj": "Titulo 2",
-	"descDoisProj": "Praesent id ligula porta felis euismod semper commodo.",
-	"iconeTresProj": "award",
-	"tituloTresProj": "Titulo 3",
-	"descTresProj": "Praesent id ligula porta felis euismod semper commodo.",
-	"iconeQuatroProj": "beer",
-	"tituloQuatroProj": "Titulo 4",
-	"descQuatroProj":	"Praesent id ligula porta felis euismod semper commodo."
-}
-    */
 };
 
 export default new HomeController();
