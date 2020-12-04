@@ -9,6 +9,7 @@ import RodapeControlle from './app/controllers/RodapeControlle';
 import SobreController from './app/controllers/SobreController';
 
 import authMiddleware from './app/middlewares/auth';
+import InfoContatoController from './app/controllers/InfoContatoController';
 
 const routes = new Router();
 
@@ -28,11 +29,15 @@ routes.post('/home', authMiddleware, HomeController.store);
 routes.put('/home', authMiddleware, HomeController.update);
 
 routes.get('/rodape', RodapeControlle.show);
-routes.post('/rodape', RodapeControlle.store);
-routes.put('/rodape', RodapeControlle.update);
+routes.post('/rodape', authMiddleware, RodapeControlle.store);
+routes.put('/rodape', authMiddleware, RodapeControlle.update);
 
 routes.get('/sobre', SobreController.show);
-routes.post('/sobre', SobreController.store);
-routes.put('/sobre', SobreController.update);
+routes.post('/sobre', authMiddleware, SobreController.store);
+routes.put('/sobre', authMiddleware, SobreController.update);
+
+routes.get('/infocontato', InfoContatoController.show);
+routes.post('/infocontato', authMiddleware, InfoContatoController.store);
+routes.put('/infocontato', authMiddleware, InfoContatoController.update);
 
 export default routes;
