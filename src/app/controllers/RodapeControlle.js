@@ -62,20 +62,20 @@ class RodapeController{
     async update(req, res){
 
         const schema = Yup.object().shape({
-            tituloPg: Yup.string(), 
-            tituloCont: Yup.string(),
-            telCont: Yup.string(),
-            endCont: Yup.string(),
-            cnpjCont: Yup.string(),
-            tituloRedSoc: Yup.string(),
-            instTitulo: Yup.string(),
-            instLink: Yup.string(),
-            facTitulo: Yup.string(),
-            facLink: Yup.string(),
-            youtubeTitulo: Yup.string(),
-            youtubeLink: Yup.string(),
-            twiterTitulo: Yup.string(),
-            twiterLink: Yup.string()
+            tituloPg: Yup.string().required(), 
+            tituloCont: Yup.string().required(),
+            telCont: Yup.string().required(),
+            endCont: Yup.string().required(),
+            cnpjCont: Yup.string().required(),
+            tituloRedSoc: Yup.string().required(),
+            instTitulo: Yup.string().required(),
+            instLink: Yup.string().required(),
+            facTitulo: Yup.string().required(),
+            facLink: Yup.string().required(),
+            youtubeTitulo: Yup.string().required(),
+            youtubeLink: Yup.string().required(),
+            twiterTitulo: Yup.string().required(),
+            twiterLink: Yup.string().required()
         });
 
         if(!(await schema.isValid(req.body))){

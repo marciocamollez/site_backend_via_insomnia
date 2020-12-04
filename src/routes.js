@@ -6,6 +6,7 @@ import LoginController from './app/controllers/LoginController';
 import PerfilController from './app/controllers/PerfilController';
 import HomeController from './app/controllers/HomeController';
 import RodapeControlle from './app/controllers/RodapeControlle';
+import SobreController from './app/controllers/SobreController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -29,5 +30,9 @@ routes.put('/home', authMiddleware, HomeController.update);
 routes.get('/rodape', RodapeControlle.show);
 routes.post('/rodape', RodapeControlle.store);
 routes.put('/rodape', RodapeControlle.update);
+
+routes.get('/sobre', SobreController.show);
+routes.post('/sobre', SobreController.store);
+routes.put('/sobre', SobreController.update);
 
 export default routes;
