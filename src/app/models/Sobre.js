@@ -12,6 +12,12 @@ const Sobre = new mongoose.Schema({
     descSobre: {
         type: String,
         required: true
+    },
+    originalName: {
+        type: String
+    },
+    fileName: {
+        type: String
     }
 },
 {

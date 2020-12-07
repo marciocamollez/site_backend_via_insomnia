@@ -32,7 +32,9 @@ class SobreController{
         const dados = {
             tituloPgSobre: "Empresa",
             tituloSobre: "First featurette heading",
-	        descSobre:"Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo."
+            descSobre:"Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.",
+            originalName: "react_raio.jpg",
+            fileName: "react_raio.jpg"
         };
         
         const sobre = await Sobre.findOne({});
