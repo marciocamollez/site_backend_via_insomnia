@@ -3,7 +3,15 @@ import fs from 'fs';
 
 class SobreImagemController{
     async update(req, res){
-        //console.log(req.file);
+        console.log(req.file);
+
+        if(!req.file){
+            return res.status(400).json({
+                error: true,
+                code: 129,
+                message: "Error: Selecione uma imagem válida JPEG ou PNG!"
+            });
+        };
 
         const dadosImagem = {
             originalName: req.file.originalname,
