@@ -3,7 +3,7 @@ import fs from 'fs';
 
 class SobreImagemController{
     async update(req, res){
-        console.log(req.file);
+        //console.log(req.file);
 
         const dadosImagem = {
             originalName: req.file.originalname,
@@ -11,7 +11,8 @@ class SobreImagemController{
         }
 
         await Sobre.findOne({}, '_id fileName').then((sobre) => {
-            console.log(sobre);
+            //console.log(sobre);
+            req.dadosSobre = sobre.fileName;
         }).catch((err) => {
             return res.status(400).json({
                 error: true,
@@ -28,10 +29,20 @@ class SobreImagemController{
             });
         });
 
+        const imgAntiga = req.file.destination + "/" + req.dadosSobre;
+
+        fs.access(imgAntiga, (err) => {
+            if(!err){
+                fs.unlink(imgAntiga, err =>{
+                    //Msg imagem excluida sucesso
+                });
+            };
+        });
+
         return res.json({
             error: false,
-            message: "Sobre Imagem Controller"
-        })
+            message: "Imagem da página sobre editado com sucesso!"
+        });
     };
 };
 
