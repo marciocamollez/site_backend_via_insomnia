@@ -1,14 +1,18 @@
 import * as Yup from 'yup';
 import Sobre from '../models/Sobre';
 import Rodape from '../models/Rodape';
+import config from '../../config/config';
 
 class SobreController{
     async show(req, res){
         Sobre.findOne({}).then((sobre) => {
+            //var url = "http://localhost:8080/tmp/uploads/sobre/" + sobre.fileName;
+            var url = config.url + "/files/sobre/" + sobre.fileName;
             Rodape.findOne({}).then((rodape) => {
                 return res.json({
                     error: false,
                     sobre: sobre,
+                    url: url,
                     rodape: rodape
                 });
             }).catch((err) => {
