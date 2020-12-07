@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 
+import multer from 'multer';
+import multerUpImgSobre from './app/middlewares/uploadImgSobre';
+
 import UserController from './app/controllers/UserController';
 import LoginController from './app/controllers/LoginController';
 import PerfilController from './app/controllers/PerfilController';
@@ -11,8 +14,10 @@ import SobreController from './app/controllers/SobreController';
 import authMiddleware from './app/middlewares/auth';
 import InfoContatoController from './app/controllers/InfoContatoController';
 import ContatoControlle from './app/controllers/ContatoControlle';
+import SobreImagemController from './app/controllers/SobreImagemController';
 
 const routes = new Router();
+const uploadImgSobre = multer(multerUpImgSobre);
 
 routes.get('/users', UserController.index);
 routes.get('/users/:id', UserController.show);
@@ -46,5 +51,7 @@ routes.get('/contato/:id', authMiddleware, ContatoControlle.show);
 routes.post('/contato', ContatoControlle.store);
 routes.put('/contato', authMiddleware, ContatoControlle.update);
 routes.delete('/contato/:id', authMiddleware, ContatoControlle.delete);
+
+routes.put('/sobre-imagem', uploadImgSobre.single('file'), authMiddleware, SobreImagemController.update);
 
 export default routes;

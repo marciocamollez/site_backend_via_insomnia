@@ -33,3 +33,6 @@ npm install --save jsonwebtoken
 
 //Instalar o módulo para paginação com mongoose
 npm install --save mongoose-paginate-v2
+
+//Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos. 
+npm install --save multer
