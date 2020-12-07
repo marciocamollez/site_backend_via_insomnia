@@ -10,6 +10,7 @@ import SobreController from './app/controllers/SobreController';
 
 import authMiddleware from './app/middlewares/auth';
 import InfoContatoController from './app/controllers/InfoContatoController';
+import ContatoControlle from './app/controllers/ContatoControlle';
 
 const routes = new Router();
 
@@ -39,5 +40,11 @@ routes.put('/sobre', authMiddleware, SobreController.update);
 routes.get('/infocontato', InfoContatoController.show);
 routes.post('/infocontato', authMiddleware, InfoContatoController.store);
 routes.put('/infocontato', authMiddleware, InfoContatoController.update);
+
+routes.get('/contato', authMiddleware, ContatoControlle.index);
+routes.get('/contato/:id', authMiddleware, ContatoControlle.show);
+routes.post('/contato', ContatoControlle.store);
+routes.put('/contato', authMiddleware, ContatoControlle.update);
+routes.delete('/contato/:id', authMiddleware, ContatoControlle.delete);
 
 export default routes;
